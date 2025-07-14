@@ -1,20 +1,27 @@
+import sys
+import os
+import logging
+
+logging.basicConfig(level=logging.WARNING)
+
+current_dir = os.path.dirname(__file__)
+step1x3d_parent = os.path.abspath(os.path.join(current_dir, ".."))
+if step1x3d_parent not in sys.path:
+    sys.path.insert(0, step1x3d_parent)
+
 import importlib
 
 __modules__ = {}
 
-
 def register(name):
     def decorator(cls):
         if name in __modules__:
-            raise ValueError(
-                f"Module {name} already exists! Names of extensions conflict!"
-            )
+            import logging
+            logging.getLogger(__name__).warning(f"Module {name} already registered, skipping.")
         else:
             __modules__[name] = cls
         return cls
-
     return decorator
-
 
 def find(name):
     if name in __modules__:

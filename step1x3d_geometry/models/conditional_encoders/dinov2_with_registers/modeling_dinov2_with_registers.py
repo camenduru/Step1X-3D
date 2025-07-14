@@ -347,8 +347,8 @@ class Dinov2WithRegistersSdpaSelfAttention(Dinov2WithRegistersSelfAttention):
             query_layer,
             key_layer,
             value_layer,
-            head_mask,
-            self.attention_probs_dropout_prob if self.training else 0.0,
+            attn_mask=head_mask,
+            dropout_p=self.attention_probs_dropout_prob if self.training else 0.0,
             is_causal=False,
             scale=None,
         )
