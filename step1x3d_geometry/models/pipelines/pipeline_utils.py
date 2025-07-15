@@ -16,7 +16,7 @@ def preprocess_image(
     force: bool = False,
     background_color: List[int] = [255, 255, 255],
     foreground_ratio: float = 0.9,
-    rembg_backend: str = "bria",
+    rembg_backend: str = "bria-rmbg",
     **rembg_kwargs,
 ):
     r"""
@@ -54,7 +54,7 @@ def preprocess_image(
                 image = rembg.remove(
                     image,
                     session=rembg.new_session(
-                        model_name="bria",
+                        model_name="bria-rmbg",
                         providers=[
                             (
                                 "CUDAExecutionProvider",
